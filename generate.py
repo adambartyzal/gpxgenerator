@@ -14,6 +14,7 @@ points = 0
 distance = 0
 prev_lat = 0
 prev_lon = 0
+#prev_ele = 0
 
 with open(waypoints_file, 'r') as waypoints:
   for line in waypoints:
@@ -29,17 +30,18 @@ with open('generated.gpx', 'w') as generated:
       if ('<trkpt' in line):
         lat = float(line[line.find('lat') + 5 : line.find('lat') + 14])
         lon = float(line[line.find('lon') + 5 : line.find('lon') + 14])
-        distance = math.sqrt((lat - prev_lat) ** 2 + (lon - prev_lon) **2) * 550 * speed
-        print(distance)
+        distance = math.sqrt((lat - prev_lat) ** 2 + (lon - prev_lon) **2) * 300000 / speed
         prev_lat = lat
         prev_lon = lon
         idx += 1
 
 
       if ('<ele' in line):
+        #ele = float(line[line.find('<ele>') + 5 : line.find('</ele>')])
+        #ele_diff = ele - prev_ele
         if (idx != 1):
-          print(idx)
           current += distance
         now = datetime.fromtimestamp(current).isoformat()
-        print(now)
         generated.write('				<time>' + now + '</time>\n')
+        #prev_ele = ele
+
