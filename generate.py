@@ -3,11 +3,11 @@ from datetime import datetime
 import math
 
 if (len(sys.argv) < 4):
-  sys.exit(f'Usage: python {sys.argv[0]} waypoints_file.gpx' 'start_timestamp' 'speed')
+  sys.exit(f'Usage: python {sys.argv[0]} waypoints_file_from_mapy.cz.gpx start_timestamp speed')
 
 waypoints_file = sys.argv[1]
-start = int(sys.argv[2])
-speed = int(sys.argv[3])
+start = float(sys.argv[2])
+speed = float(sys.argv[3])
 current = start
 
 points = 0
